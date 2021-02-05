@@ -10,21 +10,21 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LotoApp {
 
-    private final IOService ioService;
-    private final DelayService delayService;
-    private final ValidatorService validatorService;
+    private IOService ioService;
+    private DelayService delayService;
+    private ValidatorService validatorService;
 
     public LotoApp() {
-        this.ioService = new IOService();
+        this.ioService = new IOService(validatorService);
         this.delayService = new DelayService();
         this.validatorService = new ValidatorService(ioService);
     }
 
     public void start() {
         ioService.welcomeMessage();
-        loadNumber();
+        //loadNumber();
         int[] userOption = ioService.getUserOption();
-        int[] processUserOption = processUserOption(userOption);
+        int[] processUserOption = validatorService.processUserOption(userOption);
         ioService.displayInfo("Your numbers are: ");
         ioService.displayNumbers(processUserOption, " ");
         extractLuckyNumber();
@@ -45,19 +45,6 @@ public class LotoApp {
         ioService.displayInfo("And the lucky numbers are: ");
         ioService.displayNumbers(luckyNumbers, " ");
     }
-
-    public int[] processUserOption(int[] userOption) {
-        for(int i = 0; i < userOption.length; i++) {
-            int curentElement = userOption[i];
-            if (curentElement < 1 || curentElement > 49) {
-                ioService.displayInfo("Invalid number! Out of range 1 - 49!");
-                userOption = ioService.getUserOption();
-                return processUserOption(userOption);
-            }
-        }
-        return userOption;
-    }
-
 
     private void loadNumber() {
         ioService.displayInfo("This is a set of numbers form 1 to 49: ");

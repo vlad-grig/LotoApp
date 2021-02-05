@@ -3,7 +3,13 @@ package com.company.service;
 import java.util.Scanner;
 
 public class IOService {
-    private final Scanner scanner = new Scanner(System.in);
+
+    private ValidatorService validatorService;
+    public final Scanner scanner = new Scanner(System.in);
+
+    public IOService(ValidatorService validatorService) {
+        this.validatorService = validatorService;
+    }
 
     public void displayNumbers(int[] myNumbers, String s) {
         for(int number : myNumbers) {
@@ -12,16 +18,16 @@ public class IOService {
     }
 
     public void welcomeMessage() {
-        System.out.println("Welcome to our game 6/49!");
+        System.out.println("Welcome to Loto 6/49!");
     }
 
-    public void displayInfo(String s) {
-        System.out.println(s);
+    public void displayInfo(String info) {
+        System.out.println(info);
     }
 
 
     public int[] getUserOption() {
-        displayInfo("\nPlease choose 6 unique numbers in the range 1 - 49: ");
+        displayInfo("Get User Option in: Please type 6 unique numbers in the range 1 - 49 inclusive: ");
         return getNumbersFromUser();
     }
 
@@ -32,5 +38,9 @@ public class IOService {
             userNumbers[index] = userOption;
         }
         return userNumbers;
+    }
+
+    public void displayError(String error) {
+        System.out.println(error);
     }
 }
