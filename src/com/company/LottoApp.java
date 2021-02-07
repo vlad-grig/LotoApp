@@ -8,13 +8,13 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class LotoApp {
+public class LottoApp {
 
     private IOService ioService;
     private DelayService delayService;
     private ValidatorService validatorService;
 
-    public LotoApp() {
+    public LottoApp() {
         this.ioService = new IOService(validatorService);
         this.delayService = new DelayService();
         this.validatorService = new ValidatorService(ioService);
