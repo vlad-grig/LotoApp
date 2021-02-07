@@ -41,11 +41,4 @@ public class ValidatorService {
         }
         return false;
     }
-
-    public boolean checkInt(int userOption) {
-        if (ioService.scanner.nextInt() == (int) ioService.scanner.nextInt()) {
-            userOption = ioService.scanner.nextInt();
-            return true;
-        } else return false;
-    }
 }
