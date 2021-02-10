@@ -14,6 +14,7 @@ public class ValidatorService {
         if (!foundDuplicateIntoArray && !outOfRange) {
             return userOption;
         } else {
+            ioService.displayError("Something went wrong!!!");
             userOption = ioService.getUserOption();
             return processUserOption(userOption);
         }
@@ -40,4 +41,5 @@ public class ValidatorService {
         }
         return false;
     }
+
 }

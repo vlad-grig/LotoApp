@@ -22,7 +22,7 @@ public class LottoApp {
 
     public void start() {
         ioService.welcomeMessage();
-        //loadNumber();
+//        loadNumber();
         int[] userOption = ioService.getUserOption();
         int[] processedUserOption = validatorService.processUserOption(userOption);
         ioService.displayInfo("Your numbers are: ");
@@ -32,15 +32,17 @@ public class LottoApp {
     }
 
     private void extractLuckyNumber() {
-        ioService.displayInfo("\nAnd the lucky numbers are: ");
         Random random = new Random();
         int[] luckyNumbers = new int[6];
         for(int index = 0; index < 6; index++) {
             int nextInt = ThreadLocalRandom.current().nextInt(1, 50);
             luckyNumbers[index] = nextInt;
-            delayService.introduceDelay();
-            ioService.displayInfo(luckyNumbers[index] + " ");
-            delayService.introduceDelay();
+        }
+        if(!validatorService.foundDuplicateIntoArray(luckyNumbers)){
+            ioService.displayInfo("\nAnd the lucky numbers are: ");
+            ioService.displayNumbers(luckyNumbers, " ");
+        }else {
+            extractLuckyNumber();
         }
     }
 
