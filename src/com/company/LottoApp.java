@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LottoApp {
 
-    private IOService ioService;
-    private DelayService delayService;
+    private final IOService ioService;
+    private final DelayService delayService;
     private ValidatorService validatorService;
 
     public LottoApp() {
@@ -24,15 +24,15 @@ public class LottoApp {
         ioService.welcomeMessage();
         //loadNumber();
         int[] userOption = ioService.getUserOption();
-        int[] processUserOption = validatorService.processUserOption(userOption);
+        int[] processedUserOption = validatorService.processUserOption(userOption);
         ioService.displayInfo("Your numbers are: ");
-        ioService.displayNumbers(processUserOption, " ");
+        ioService.displayNumbers(processedUserOption, " ");
         extractLuckyNumber();
         ioService.displayInfo("\n");
     }
 
     private void extractLuckyNumber() {
-        ioService.displayInfo("\nNumber extraction begins now: ");
+        ioService.displayInfo("\nAnd the lucky numbers are: ");
         Random random = new Random();
         int[] luckyNumbers = new int[6];
         for(int index = 0; index < 6; index++) {
@@ -42,8 +42,6 @@ public class LottoApp {
             ioService.displayInfo(luckyNumbers[index] + " ");
             delayService.introduceDelay();
         }
-        ioService.displayInfo("And the lucky numbers are: ");
-        ioService.displayNumbers(luckyNumbers, " ");
     }
 
     private void loadNumber() {
@@ -52,10 +50,10 @@ public class LottoApp {
         ioService.displayNumbers(myNumbers, "  ");
     }
 
-    private int[] getInts(int i, int i2) {
-        int[] myNumbers = new int[i];
+    private int[] getInts(int maxNumber, int minNumber) {
+        int[] myNumbers = new int[maxNumber];
         for(int index = 0; index < myNumbers.length; index++) {
-            myNumbers[index] = index + i2;
+            myNumbers[index] = index + minNumber;
         }
         return myNumbers;
     }

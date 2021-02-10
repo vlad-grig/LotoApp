@@ -18,7 +18,7 @@ public class IOService {
     }
 
     public void welcomeMessage() {
-        System.out.println("Welcome to Loto 6/49!");
+        System.out.println("Welcome to Lottery 6/49!");
     }
 
     public void displayInfo(String info) {
